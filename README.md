@@ -8,7 +8,7 @@ FAQBot is a smart FAQ assistant built on Azure OpenAI. Give it a system prompt, 
 
 ## What it does
 
-- Chat interface powered by Azure OpenAI (GPT-4.1-nano)
+- Chat interface powered by Azure OpenAI (GPT-5-mini)
 - Customisable system prompt — define who the bot is and what it knows
 - Real-time responses via Azure OpenAI API
 
