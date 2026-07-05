@@ -32,16 +32,28 @@ const client = new AzureOpenAI({
     deployment: process.env.AZURE_OPENAI_DEPLOYMENT
 });
 
+// Fixed system prompt — this is the single source of truth for the bot's
+// identity and scope. It is intentionally hardcoded on the server so it
+// can never be overridden by anything sent from the client (UI, dev tools,
+// or a direct API call).
+const FIXED_SYSTEM_PROMPT = "You are a helpful FAQ assistant for SoccerGPT. You only answer questions related to soccer, including players, clubs, leagues, tournaments, rules, fixtures, scores, transfers, and football history. If asked anything outside this scope, politely decline.";
+
 // Chat endpoint
 app.post('/api/chat', async (req, res) => {
-    const { message, systemPrompt } = req.body;
+    // Note: systemPrompt is intentionally NOT read from req.body.
+    // The prompt is fixed server-side and cannot be changed by any client request.
+    const { message } = req.body;
+
+    if (!message || typeof message !== 'string' || !message.trim()) {
+        return res.status(400).json({ error: 'A non-empty "message" field is required.' });
+    }
 
     try {
         const response = await client.chat.completions.create({
             messages: [
                 {
                     role: 'system',
-                    content: systemPrompt || 'You are a helpful FAQ assistant.'
+                    content: FIXED_SYSTEM_PROMPT
                 },
                 {
                     role: 'user',
@@ -84,5 +96,5 @@ app.post('/api/chat', async (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`FAQBot running on port ${PORT}`);
+    console.log(`SoccerGPT running on port ${PORT}`);
 });
