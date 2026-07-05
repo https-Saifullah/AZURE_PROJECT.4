@@ -3,30 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQBot - Smart FAQ Assistant</title>
+    <title>SoccerGPT - Smart FAQ Assistant</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1> FAQBot </h1>
+        <h1>
+            <svg class="ball-icon" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                    <radialGradient id="ballGradient" cx="35%" cy="30%" r="75%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="65%" stop-color="#fdfaf2"/>
+                        <stop offset="100%" stop-color="#e7ddc2"/>
+                    </radialGradient>
+                    <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f4e2a1"/>
+                        <stop offset="50%" stop-color="#d4af37"/>
+                        <stop offset="100%" stop-color="#a97e1e"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- outer ring -->
+                <circle cx="60" cy="60" r="56" fill="none" stroke="url(#ringGradient)" stroke-width="3"/>
+                <!-- ball body -->
+                <circle cx="60" cy="60" r="51" fill="url(#ballGradient)" stroke="#c9a34a" stroke-width="1.5"/>
+
+                <!-- soft top-left highlight -->
+                <ellipse cx="42" cy="38" rx="16" ry="10" fill="#ffffff" opacity="0.55"/>
+
+                <!-- center pentagon -->
+                <polygon points="60,38 73,48 68,64 52,64 47,48" fill="#8a6a12" opacity="0.9"/>
+                <polygon points="60,38 73,48 68,64 52,64 47,48" fill="none" stroke="#5c4a12" stroke-width="1.2"/>
+
+                <!-- surrounding pentagon seams -->
+                <path d="M60,38 L60,17" stroke="#8a6a12" stroke-width="1.6"/>
+                <path d="M73,48 L92,40" stroke="#8a6a12" stroke-width="1.6"/>
+                <path d="M68,64 L78,84" stroke="#8a6a12" stroke-width="1.6"/>
+                <path d="M52,64 L42,84" stroke="#8a6a12" stroke-width="1.6"/>
+                <path d="M47,48 L28,40" stroke="#8a6a12" stroke-width="1.6"/>
+
+                <!-- outer pentagons (partial, for realism) -->
+                <polygon points="60,17 70,24 68,34 52,34 50,24" fill="none" stroke="#8a6a12" stroke-width="1.2" opacity="0.7"/>
+                <polygon points="92,40 100,50 92,60 82,54 84,44" fill="none" stroke="#8a6a12" stroke-width="1.2" opacity="0.7"/>
+                <polygon points="78,84 82,94 71,100 62,92 68,82" fill="none" stroke="#8a6a12" stroke-width="1.2" opacity="0.7"/>
+                <polygon points="42,84 38,94 49,100 58,92 52,82" fill="none" stroke="#8a6a12" stroke-width="1.2" opacity="0.7"/>
+                <polygon points="28,40 20,50 28,60 38,54 36,44" fill="none" stroke="#8a6a12" stroke-width="1.2" opacity="0.7"/>
+            </svg>
+            SoccerGPT
+        </h1>
         <p class="subtitle">Powered by Azure OpenAI</p>
 
         <!-- System Prompt Section -->
         <div class="card">
-            <h2>System Prompt</h2>
-            <p>Tell the bot who it is and what it knows</p>
-            <textarea id="systemPrompt" placeholder="Example: You are a helpful assistant for Amity University. You answer questions about admissions, fees, and courses only.">You are a helpful FAQ assistant for Amity University. You only answer questions related to admissions, fees, courses, and campus life. If asked anything outside this scope, politely decline.</textarea>
+            <h2>System Prompt <span class="lock-badge">🔒 Locked</span></h2>
+            <p>This assistant's identity and scope are fixed and cannot be edited</p>
+            <textarea id="systemPrompt" readonly>You are a helpful FAQ assistant for SoccerGPT. You only answer questions related to soccer, including players, clubs, leagues, tournaments, rules, fixtures, scores, transfers, and football history. If asked anything outside this scope, politely decline.</textarea>
         </div>
 
         <!-- Chat Section -->
         <div class="card">
             <h2>Ask a Question</h2>
             <div id="chatBox" class="chat-box">
-                <div class="message bot"> Hi! I am FAQBot. Ask me anything!</div>
+                <div class="message bot">⚽ Hi! I am SoccerGPT. Ask me anything about the beautiful game!</div>
             </div>
             <div class="input-row">
                 <input type="text" id="userInput" placeholder="Type your question here..." />
-                <button id="sendBtn">Send</button>
+                <button id="sendBtn"><span class="btn-label">Send</span></button>
             </div>
         </div>
     </div>
